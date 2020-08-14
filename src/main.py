@@ -3,10 +3,11 @@ import resolve
 import helpers
 
 reducePolynomial = parsing.getPolynomial()
+helpers.printReduceForm(reducePolynomial)
+# remove null coeff after printing reduce form
+reducePolynomial = parsing.removeNullCoefficient(reducePolynomial)
 polynomialDegree = helpers.getDegree(reducePolynomial)
-reduceForm = helpers.getReduceForm(reducePolynomial)
 
-print('Reduced form:', reduceForm)
 print('Polynomial degree:', polynomialDegree)
 
 if polynomialDegree == 0:

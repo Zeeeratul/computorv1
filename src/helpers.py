@@ -26,7 +26,7 @@ def getDiscriminant(a, b, c):
     discriminant = bSquare + leftPart
     return discriminant
 
-def getReduceForm(reducePolynomials):
+def printReduceForm(reducePolynomials):
     reduceForm = ""
 
     for degree in reducePolynomials:
@@ -43,7 +43,8 @@ def getReduceForm(reducePolynomials):
         reduceForm = reduceForm[2:]
     
     reduceForm = reduceForm + "= 0"
-    return reduceForm
+
+    print('Reduced form:', reduceForm)
 
 def reduceNumber(number):
 

@@ -23,7 +23,6 @@ def getPolynomial():
 
 
 def splitInMonomials(polynomial):
-
     monomialsList = []
     startIndex = 0
     index = 0
@@ -40,7 +39,6 @@ def splitInMonomials(polynomial):
     return monomialsList
 
 def convertMonomials(monomialsList):
-
     monomialsDict = {}
     pattern = re.compile(r'(?P<sign>[+-])?(?P<coefficient>\d+[.]?\d*)\*X\^(?P<degree>\d+)')
 
@@ -73,15 +71,16 @@ def reducing(leftSide, rightSide):
             if number != 0:
                 leftSide.update({ degree: number })
 
-    # REMOVE ALL 0 COEFFICIENT
+    return leftSide
 
-    # degreeToDelete = []
+def removeNullCoefficient(leftSide):
+    degreeToDelete = []
 
-    # for degree in leftSide:
-    #     if leftSide[degree] == 0:
-    #         degreeToDelete.append(degree)
+    for degree in leftSide:
+        if leftSide[degree] == 0:
+            degreeToDelete.append(degree)
 
-    # for degree in degreeToDelete:
-    #     del leftSide[degree]
+    for degree in degreeToDelete:
+        del leftSide[degree]
 
     return leftSide
