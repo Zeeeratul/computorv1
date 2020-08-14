@@ -25,3 +25,38 @@ def getDiscriminant(a, b, c):
 
     discriminant = bSquare + leftPart
     return discriminant
+
+def getReduceForm(reducePolynomials):
+    reduceForm = ""
+
+    for degree in reducePolynomials:
+        numberReduced = reduceNumber(reducePolynomials[degree])
+        
+        if numberReduced[0] == "-":
+            numberReduced = "- " + numberReduced[1:]
+        else: 
+            numberReduced = "+ " + numberReduced
+
+        reduceForm +=  numberReduced + " * X^" + str(degree) + " "
+
+    if reduceForm[0] == "+":
+        reduceForm = reduceForm[2:]
+    
+    reduceForm = reduceForm + "= 0"
+    return reduceForm
+
+def reduceNumber(number):
+
+    stringNumber = format(number, '.6f')
+    index = len(stringNumber) - 1
+
+    while stringNumber[index] == "0":
+        index -= 1
+
+    if stringNumber[index] == ".":
+        index -= 1
+    
+    if (0 == float(stringNumber)):
+        return "0"
+    else:
+        return stringNumber[: index + 1]

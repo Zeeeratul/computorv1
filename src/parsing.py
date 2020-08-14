@@ -3,18 +3,24 @@ import re
 
 def getPolynomial():
     if len(sys.argv) > 1:
-        return parsePolynomial(sys.argv[1])
+        polynomialArray = sys.argv[1].split('=')
+
+        leftSide = polynomialArray[0].strip()
+        rightSide = polynomialArray[1].strip()
+
+        monomialsLeftList = splitInMonomials(leftSide)
+        monomialsRightList = splitInMonomials(rightSide)
+
+        convertedMonomialsLeftList = convertMonomials(monomialsLeftList)
+        convertedMonomialsRightList = convertMonomials(monomialsRightList)
+
+        reducePolynomial = reducing(convertedMonomialsLeftList, convertedMonomialsRightList)
+
+        return reducePolynomial
     else:
         print('no argument exit program')
         sys.exit()
 
-def parsePolynomial(string):
-    polynomialArray = string.split('=')
-
-    leftSide = polynomialArray[0].strip()
-    rightSide = polynomialArray[1].strip()
-
-    return [leftSide, rightSide]
 
 def splitInMonomials(polynomial):
 
@@ -33,7 +39,7 @@ def splitInMonomials(polynomial):
 
     return monomialsList
 
-def convertMonomial(monomialsList):
+def convertMonomials(monomialsList):
 
     monomialsDict = {}
     pattern = re.compile(r'(?P<sign>[+-])?(?P<coefficient>\d+[.]?\d*)\*X\^(?P<degree>\d+)')
@@ -52,6 +58,7 @@ def convertMonomial(monomialsList):
 
     return monomialsDict
 
+
 def reducing(leftSide, rightSide):
     for degree in rightSide:
         number = rightSide[degree] * -1
@@ -68,13 +75,13 @@ def reducing(leftSide, rightSide):
 
     # REMOVE ALL 0 COEFFICIENT
 
-    degreeToDelete = []
+    # degreeToDelete = []
 
-    for degree in leftSide:
-        if leftSide[degree] == 0:
-            degreeToDelete.append(degree)
+    # for degree in leftSide:
+    #     if leftSide[degree] == 0:
+    #         degreeToDelete.append(degree)
 
-    for degree in degreeToDelete:
-        del leftSide[degree]
+    # for degree in degreeToDelete:
+    #     del leftSide[degree]
 
     return leftSide
