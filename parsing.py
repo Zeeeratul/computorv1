@@ -1,10 +1,9 @@
 import sys
 import re
+import collections
 
 def getPolynomial():
     if len(sys.argv) > 1:
-        print(sys.argv[1])
-
         polynomialArray = sys.argv[1].split('=')
 
         leftSide = polynomialArray[0].strip()
@@ -17,8 +16,9 @@ def getPolynomial():
         convertedMonomialsRightList = convertMonomials(monomialsRightList)
 
         reducePolynomial = reducing(convertedMonomialsLeftList, convertedMonomialsRightList)
+        sortedPolynomial = collections.OrderedDict(sorted(reducePolynomial.items()))
 
-        return reducePolynomial
+        return sortedPolynomial
     else:
         print('Please provided a correct argument')
         sys.exit()
@@ -54,6 +54,8 @@ def convertMonomials(monomialsList):
         if matches.group('sign'): sign = matches.group('sign')
         if sign == "-": coefficient *= -1
 
+        if degree in monomialsDict:
+            coefficient += monomialsDict[degree]
         monomialsDict.update({ degree: coefficient })
 
     return monomialsDict

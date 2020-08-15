@@ -60,6 +60,6 @@ def secondDegree(polynomial):
         result1 = negativeBDivided + " + i * " + squareRootDivided
         result2 = negativeBDivided + " - i * " + squareRootDivided
 
-        print('Discriminant is negative, the two complex numbers as solutions are:')
+        print('Discriminant is negative, the two complex numbers solutions are:')
         print(result1)
         print(result2)
