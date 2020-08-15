@@ -1,10 +1,8 @@
-import math
-
 import helpers
 
 def zeroDegree(polynomial):
     if 0 in polynomial:
-        print('Unsolvable equation')
+        print('No solution for this equation')
     else:
         print('All reals numbers are solutions')
 
@@ -22,7 +20,6 @@ def firstDegree(polynomial):
     print(result)
     return result
 
-
 def secondDegree(polynomial):
     c = 0
     b = 0
@@ -36,14 +33,13 @@ def secondDegree(polynomial):
         a = polynomial[2]
 
     discriminant = helpers.getDiscriminant(a, b, c)
+    denominator = 2 * a
     
     if discriminant > 0:
-
         squareRoot = helpers.getSquareRoot(discriminant)
 
         numerator1 = (b * -1) + squareRoot
         numerator2 = (b * -1) - squareRoot
-        denominator = 2 * a
 
         result1 = helpers.reduceNumber(numerator1 / denominator)
         result2 = helpers.reduceNumber(numerator2 / denominator)
@@ -53,8 +49,17 @@ def secondDegree(polynomial):
         print(result2)
     elif discriminant == 0:
         result = helpers.reduceNumber((b * -1) / (2 * a))
-        print('One result:', result)
+        print('Discriminant is equal zero, the only solution is:', result)
     else:
-        print('2 irrational solutions')
-    
+        discriminant *= -1
+        squareRoot = helpers.getSquareRoot(discriminant)
 
+        negativeBDivided = helpers.reduceNumber(b * -1 / denominator)
+        squareRootDivided = helpers.reduceNumber(squareRoot / denominator)
+
+        result1 = negativeBDivided + " + i * " + squareRootDivided
+        result2 = negativeBDivided + " - i * " + squareRootDivided
+
+        print('Discriminant is negative, the two complex numbers as solutions are:')
+        print(result1)
+        print(result2)

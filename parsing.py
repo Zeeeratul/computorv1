@@ -3,6 +3,8 @@ import re
 
 def getPolynomial():
     if len(sys.argv) > 1:
+        print(sys.argv[1])
+
         polynomialArray = sys.argv[1].split('=')
 
         leftSide = polynomialArray[0].strip()
@@ -18,7 +20,7 @@ def getPolynomial():
 
         return reducePolynomial
     else:
-        print('no argument exit program')
+        print('Please provided a correct argument')
         sys.exit()
 
 

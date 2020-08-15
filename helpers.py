@@ -29,6 +29,10 @@ def getDiscriminant(a, b, c):
 def printReduceForm(reducePolynomials):
     reduceForm = ""
 
+    if not reducePolynomials:
+        print('Reduced form: 0 * X^0 = 0')
+        return 0
+
     for degree in reducePolynomials:
         numberReduced = reduceNumber(reducePolynomials[degree])
         
